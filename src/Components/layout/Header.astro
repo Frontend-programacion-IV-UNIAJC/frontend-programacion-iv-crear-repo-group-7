@@ -1,0 +1,19 @@
+---
+//Header.astro
+//Marca y navegacion principal
+const base = import.meta.env.BASE_URL;
+const {activo} = Astro.props;
+
+const enlaces = [
+    {nombre: "Inicio", ruta:"", clave: "inicio"},
+    {nombre: "Catalogo", ruta:"catalogo", clave: "catalogo"},
+    {nombre: "Favoritos", ruta:"favoritos", clave: "favoritos"},
+    {nombre: "Contacto", ruta:"contacto", clave: "contacto"},
+    {nombre: "Acerca de", ruta:"acerca-de", clave: "acerca"},
+
+];
+---
+
+<header class="encabezado">
+    <div class="contenedor encabezado_interior"></div>
+</header>
