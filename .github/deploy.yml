@@ -9,21 +9,17 @@ permissions:
 
 jobs:
   construir:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout de repositorio
-        uses: actions/checkout@v4
-        
-      - name: Construir proyecto con Astro
-        uses: withastro/action@v3
+      runs-on: ubuntu-latest
+      steps:
+          - uses: actions/checkout@v4
+          - uses: withastro/action@v3
+            with: 
+              node-version: 22
 
   publicar:
-    needs: construir
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Desplegar en GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      needs: construir
+      runs-on: ubuntu-latest
+      environment:
+          name: github-pages
+      steps:
+          - uses: actions/deploy-pages@v4
