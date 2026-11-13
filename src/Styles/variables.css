@@ -1,0 +1,67 @@
+/* Sistema de Diseño VitrinaDemo */
+
+:root {
+  /* color de marca (violeta del header y tarjetas) */
+  --color-marca: #8b7cf6;
+  --color-marca-oscuro: #5b49d6;   /* hover, enlaces y textos sobre fondo claro */
+  --color-marca-suave: #e6e1fd;
+  --color-marca-borde: #c9c0fa;
+
+  /* acento azul (fondo general del mockup) */
+  --color-acento: #8fb1ff;
+  --color-acento-suave: #dbe6ff;
+
+  /* neutros */
+  --color-texto: #111111;
+  --color-texto-suave: #3d3d4d;
+  --color-texto-tenue: #5c5c6e;
+  --color-fondo: #ffffff;
+  --color-lienzo: #8fb1ff;         /* fondo de la página */
+  --color-superficie: #ffffff;     /* placeholders, buscador, banners */
+  --color-borde: #111111;          /* el mockup usa bordes negros finos */
+  --color-borde-fuerte: #111111;
+  --color-chip: #222222;           /* botones de "Categorías Populares" */
+  --color-chip-texto: #ffffff;
+
+  /* color estados */
+  --color-error: #a3161b;
+  --color-error-suave: #fdf0f0;
+  --color-exito: #1e6b3a;
+  --color-exito-suave: #eef6f1;
+
+  /* tipografia (el mockup usa sans-serif en todo) */
+  --fuente: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --fuente-texto: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --texto-xxl: 2.75rem;
+  --texto-xl: 2rem;
+  --texto-l: 1.5rem;
+  --texto-M: 1.125rem;
+  --texto-base: 1rem;
+  --texto-s: 0.875rem;
+  --texto-xs: 0.75rem;
+
+  /* espaciado */
+  --esp-1: 0.25rem;
+  --esp-2: 0.5rem;
+  --esp-3: 1rem;
+  --esp-4: 1.5rem;
+  --esp-5: 2rem;
+  --esp-6: 3rem;
+  --esp-7: 4.5rem;
+
+  /* radios (faltaba --radio-s, lo usa :focus-visible) */
+  --radio-s: 6px;
+  --radio-m: 10px;
+  --radio-l: 16px;
+  --radio-pill: 999px;             /* buscador */
+
+  /* elevacion */
+  --sombra-1: 0 1px 2px rgba(17, 17, 17, 0.08);
+  --sombra-2: 0 6px 20px -8px rgba(17, 17, 17, 0.2);
+  --sombra-3: 0 18px 40px -16px rgba(17, 17, 17, 0.3);
+
+  /* medidas */
+  --ancho-maximo: 1180px;
+  --ancho-lectura: 68ch;
+  --transicion: 160ms ease;
+}
