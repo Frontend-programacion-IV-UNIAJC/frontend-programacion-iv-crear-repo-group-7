@@ -1,16 +1,320 @@
 ---
----
+import Layout from "../layouts/Layout.astro";
+import Boton from "../Components/ui/Boton.astro";
+import Etiqueta from "../Components/ui/Etiqueta.astro";
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Hola mundos</h1>
-	</body>
-</html>
+const base = import.meta.env.BASE_URL;
+
+// Imagenes: estan en public/img/ (sin espacios en el nombre)
+const img = {
+  portadaMovil: `${base}img/buscar-movil.png`,
+  portadaEscritorio: `${base}img/buscar-escritorio.png`,
+};
+
+// Accesos rapidos del mockup (fila de 4 tarjetas)
+const accesos = [
+  { texto: "Ofertas", icono: "🏷️", ruta: "ofertas" },
+  { texto: "Envío rápido", icono: "🚚", ruta: "catalogo" },
+  { texto: "Electrónica", icono: "🎧", ruta: "catalogo?categoria=laptops" },
+  { texto: "Moda", icono: "👟", ruta: "catalogo?categoria=womens-shoes" },
+];
+
+// Categorias populares (chips oscuros del mockup)
+const categorias = [
+  { texto: "Celulares", ruta: "catalogo?categoria=smartphones" },
+  { texto: "Hogar", ruta: "catalogo?categoria=home-decoration" },
+  { texto: "Computación", ruta: "catalogo?categoria=laptops" },
+  { texto: "Belleza", ruta: "catalogo?categoria=beauty" },
+];
+---
+<Layout
+  titulo="VitrinaDemo — Encuentra y compara productos en un solo lugar"
+  descripcion="Catálogo con filtros por categoría y precio, descuentos y calificaciones a la vista, para comprar rápido desde el celular."
+  activo="inicio"
+  ancho="ancho"
+>
+  <!-- ============ Portada ============ -->
+  <section class="portada">
+    <div class="contenedor portada__interior">
+      <div class="portada__texto">
+        <h1>Compara productos sin abrir cinco pestañas</h1>
+        <p class="portada__entrada">
+          Precio, descuento y calificación en cada producto. Filtra por
+          categoría y ordena por precio o popularidad.
+        </p>
+
+        <form class="buscador" action={`${base}catalogo`} method="get" role="search">
+          <label class="solo-lectores" for="q">Buscar productos, marcas y más</label>
+          <input id="q" name="q" type="search" placeholder="Buscar productos, marcas y más…" />
+          <button type="submit" aria-label="Buscar">🔍</button>
+        </form>
+
+        <div class="portada__acciones">
+          <Boton href={`${base}catalogo`} tamano="grande">Ver el catálogo</Boton>
+          <Boton href={`${base}ofertas`} variante="secundario" tamano="grande">
+            Ir a ofertas
+          </Boton>
+        </div>
+      </div>
+
+      <div class="portada__medio">
+        <picture>
+          <source media="(min-width: 900px)" srcset={img.portadaEscritorio} />
+          <img
+            src={img.portadaMovil}
+            alt="Vista de la portada de VitrinaDemo con buscador, ofertas y categorías"
+            width="402"
+            height="874"
+            fetchpriority="high"
+          />
+        </picture>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Accesos rapidos ============ -->
+  <section class="contenedor seccion" aria-label="Accesos rápidos">
+    <ul class="accesos">
+      {accesos.map((a) => (
+        <li>
+          <a class="acceso" href={`${base}${a.ruta}`}>
+            <span class="acceso__icono" aria-hidden="true">{a.icono}</span>
+            {a.texto}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- ============ Ofertas ============ -->
+  <!-- Las tarjetas de producto llegan en la clase 5 con Card y CardGrid. -->
+  <section class="contenedor seccion">
+    <div class="seccion__encabezado">
+      <h2>¡Ofertas imperdibles!</h2>
+      <Boton href={`${base}ofertas`} variante="fantasma">Ver más</Boton>
+    </div>
+    <p class="etiquetas-demo">
+      <Etiqueta tono="oferta">-20%</Etiqueta>
+      <Etiqueta tono="marca">★ 4.5</Etiqueta>
+      <Etiqueta>Celulares</Etiqueta>
+    </p>
+    <p class="pendiente">Aquí van las tarjetas de ofertas (clase 5).</p>
+  </section>
+
+  <!-- ============ Categorias populares ============ -->
+  <section class="contenedor seccion">
+    <div class="categorias">
+      <h2>Categorías populares</h2>
+      <ul class="categorias__lista">
+        {categorias.map((c) => (
+          <li><a class="chip" href={`${base}${c.ruta}`}>{c.texto}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Beneficios ============ -->
+  <section class="contenedor seccion" aria-label="Beneficios">
+    <ul class="beneficios">
+      <li><span aria-hidden="true">🚚</span> Envíos a todo el país</li>
+      <li><span aria-hidden="true">🛡️</span> Pago seguro</li>
+      <li><span aria-hidden="true">↩️</span> Devolución garantizable</li>
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  /* ---- Portada ---- */
+  .portada {
+    background: linear-gradient(180deg, var(--color-marca-suave) 0%, var(--color-lienzo) 100%);
+    border-bottom: 1px solid var(--color-borde);
+  }
+  .portada__interior {
+    display: grid;
+    gap: var(--esp-5);
+    padding-top: var(--esp-5);
+    padding-bottom: var(--esp-5);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .portada__interior {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: var(--esp-6);
+      padding-top: var(--esp-7);
+      padding-bottom: var(--esp-7);
+    }
+  }
+  .portada__texto h1 { max-width: 20ch; }
+  .portada__entrada {
+    font-size: var(--texto-M);
+    color: var(--color-texto-suave);
+    max-width: 46ch;
+  }
+  .portada__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--esp-2);
+  }
+  .portada__medio img {
+    width: 100%;
+    max-width: 300px;      /* la imagen de celular es alta: no la dejamos gigante */
+    height: auto;
+    margin: 0 auto;
+    border-radius: var(--radio-l);
+    box-shadow: var(--sombra-3);
+  }
+  @media (min-width: 900px) {
+    .portada__medio img { max-width: 100%; }
+  }
+
+  /* ---- Buscador ---- */
+  .buscador {
+    display: flex;
+    align-items: center;
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-pill);
+    padding: 0 var(--esp-2) 0 var(--esp-3);
+    margin-bottom: var(--esp-3);
+    max-width: 520px;
+  }
+  .buscador input {
+    flex: 1;
+    min-width: 0;
+    min-height: 44px;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    font-weight: 600;
+    color: var(--color-texto);
+  }
+  .buscador input:focus-visible { outline: none; }
+  .buscador:focus-within {
+    outline: 3px solid var(--color-marca-oscuro);
+    outline-offset: 2px;
+  }
+  .buscador button {
+    min-width: 44px;
+    min-height: 44px;
+    border: 0;
+    background: transparent;
+    font-size: var(--texto-l);
+    cursor: pointer;
+  }
+
+  /* ---- Secciones ---- */
+  .seccion { padding-top: var(--esp-5); }
+  .seccion__encabezado {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--esp-3);
+    margin-bottom: var(--esp-3);
+    padding: var(--esp-3) var(--esp-4);
+    background: var(--color-marca);
+    border-radius: var(--radio-m);
+  }
+  .seccion__encabezado h2 { margin: 0; }
+  .etiquetas-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--esp-2);
+  }
+  .pendiente {
+    padding: var(--esp-5);
+    border: 2px dashed var(--color-texto-tenue);
+    border-radius: var(--radio-m);
+    color: var(--color-texto);
+    text-align: center;
+    margin: 0;
+  }
+
+  /* ---- Accesos rapidos: 4 tarjetas en fila ---- */
+  .accesos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--esp-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  @media (min-width: 768px) {
+    .accesos { grid-template-columns: repeat(4, 1fr); }
+  }
+  .acceso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--esp-2);
+    padding: var(--esp-3);
+    background: var(--color-marca);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-m);
+    color: var(--color-texto);
+    font-weight: 700;
+    text-decoration: none;
+    transition: box-shadow var(--transicion);
+  }
+  .acceso:hover {
+    color: var(--color-texto);
+    box-shadow: var(--sombra-2);
+  }
+  .acceso__icono {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-s);
+    font-size: var(--texto-xl);
+  }
+
+  /* ---- Categorias populares ---- */
+  .categorias {
+    padding: var(--esp-3) var(--esp-4);
+    background: var(--color-acento-suave);
+    border-radius: var(--radio-m);
+  }
+  .categorias h2 { font-size: var(--texto-M); margin-bottom: var(--esp-2); }
+  .categorias__lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--esp-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 var(--esp-3);
+    background: var(--color-chip);
+    color: var(--color-chip-texto);
+    border-radius: var(--radio-s);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .chip:hover { background: #000; color: var(--color-chip-texto); }
+
+  /* ---- Beneficios ---- */
+  .beneficios {
+    display: grid;
+    gap: var(--esp-3);
+    list-style: none;
+    margin: 0;
+    padding: var(--esp-3) 0;
+    font-weight: 700;
+  }
+  @media (min-width: 768px) {
+    .beneficios { grid-template-columns: repeat(3, 1fr); }
+  }
+  .beneficios li {
+    display: flex;
+    align-items: center;
+    gap: var(--esp-3);
+  }
+  .beneficios span { font-size: var(--texto-xl); }
+</style>

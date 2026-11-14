@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+<Layout
+  titulo="Contacto — VitrinaDemo"
+  descripcion="Escríbenos si tienes dudas sobre VitrinaDemo."
+  activo="contacto"
+>
+  <section class="contenedor">
+    <h1>Contacto</h1>
+    <p class="entrada">Cuéntanos tu duda o sugerencia.</p>
+    <div class="pendiente">Se construye en la clase 5.</div>
+  </section>
+</Layout>
+
+<style>
+  .entrada {
+    max-width: var(--ancho-lectura);
+    color: var(--color-texto-suave);
+  }
+  .pendiente {
+    margin-top: var(--esp-5);
+    padding: var(--esp-6) var(--esp-4);
+    border: 2px dashed var(--color-texto-tenue);
+    border-radius: var(--radio-m);
+    color: var(--color-texto);
+    text-align: center;
+  }
+</style>
