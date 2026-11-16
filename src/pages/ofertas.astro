@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+<Layout
+  titulo="Ofertas — VitrinaDemo"
+  descripcion="Productos con descuento, con el precio y la calificación a la vista."
+  activo="ofertas"
+>
+  <section class="contenedor">
+    <h1>Ofertas imperdibles</h1>
+    <p class="entrada">Productos con descuento, ordenados para que compares rápido.</p>
+    <div class="pendiente">Se construye en la clase 5.</div>
+  </section>
+</Layout>
+
+<style>
+  .entrada {
+    max-width: var(--ancho-lectura);
+    color: var(--color-texto-suave);
+  }
+  .pendiente {
+    margin-top: var(--esp-5);
+    padding: var(--esp-6) var(--esp-4);
+    border: 2px dashed var(--color-texto-tenue);
+    border-radius: var(--radio-m);
+    color: var(--color-texto);
+    text-align: center;
+  }
+</style>

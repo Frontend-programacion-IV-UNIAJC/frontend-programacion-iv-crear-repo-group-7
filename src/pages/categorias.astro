@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+<Layout
+  titulo="Categorías — VitrinaDemo"
+  descripcion="Todas las categorías de productos de VitrinaDemo."
+  activo="categorias"
+>
+  <section class="contenedor">
+    <h1>Categorías</h1>
+    <p class="entrada">Elige una categoría para ver sus productos.</p>
+    <div class="pendiente">Se construye en la clase 5.</div>
+  </section>
+</Layout>
+
+<style>
+  .entrada {
+    max-width: var(--ancho-lectura);
+    color: var(--color-texto-suave);
+  }
+  .pendiente {
+    margin-top: var(--esp-5);
+    padding: var(--esp-6) var(--esp-4);
+    border: 2px dashed var(--color-texto-tenue);
+    border-radius: var(--radio-m);
+    color: var(--color-texto);
+    text-align: center;
+  }
+</style>

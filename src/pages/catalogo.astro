@@ -1,14 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Filtros from "../components/catalogo/Filtros.astro";
-import BarraDeBusqueda from "../components/catalogo/BarraDeBusqueda.astro";
-import CardGrid from "../components/catalogo/CardGrid.astro";
-import Paginacion from "../components/catalogo/Paginacion.astro";
-import { recetas, categorias, dificultades } from "../data/datos-de-prueba.js";
+import Filtros from "../catalogo/Filtros.astro";
+import BarraDeBusqueda from "../catalogo/BarraDeBusqueda.astro";
+import CardGrid from "../catalogo/CardGrid.astro";
+import Paginacion from "../catalogo/Paginacion.astro";
+import { recetas, categorias, dificultades } from "../Data/datos-de-pruebas.js";
 ---
 
 <Layout
-    titulo="Catalogo — SaborU"
+titulo="Catalogo — SaborU"
     descripcion="Catalogo de recetas rapidas con tiempo y dificultad visibles."
     activo="catalogo"
 >
@@ -33,6 +33,19 @@ import { recetas, categorias, dificultades } from "../data/datos-de-prueba.js";
             </div>
         </div>
     </div>
+    </Layout>
+
+<Layout
+  titulo="Catálogo — VitrinaDemo"
+  descripcion="Catálogo de productos con filtros por categoría y precio, y orden por precio o popularidad."
+  activo="catalogo"
+>
+  <section class="contenedor">
+    <h1>Encuentra lo que buscas</h1>
+    <p class="entrada">Filtra por categoría y precio, y ordena por precio o popularidad.</p>
+    <div class="pendiente">Se construye en la clase 5.</div>
+  </section>
+
 </Layout>
 
 <style>
@@ -40,6 +53,7 @@ import { recetas, categorias, dificultades } from "../data/datos-de-prueba.js";
     max-width: var(--ancho-lectura);
     color: var(--color-texto-suave);
   }
+
 
   /* Celular: filtros arriba y resultados debajo (una sola columna) */
   .catalogo {
@@ -70,6 +84,15 @@ import { recetas, categorias, dificultades } from "../data/datos-de-prueba.js";
   .catalogo__conteo strong {
     color: var(--color-texto);
   }
-</style>
+
 
  
+  .pendiente {
+    margin-top: var(--esp-5);
+    padding: var(--esp-6) var(--esp-4);
+    border: 2px dashed var(--color-texto-tenue);
+    border-radius: var(--radio-m);
+    color: var(--color-texto);
+    text-align: center;
+  }
+</style>
