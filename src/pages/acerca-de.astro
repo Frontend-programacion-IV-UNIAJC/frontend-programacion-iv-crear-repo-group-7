@@ -7,45 +7,63 @@ import Layout from "../layouts/Layout.astro";
   activo="acerca-de"
 >
   <div class="contenedor acerca">
-    <article class="acerca__texto">
-      <h1>Acerca de VitrinaDemo</h1>
+    <h1 class="acerca__titulo">Acerca de</h1>
 
-      <h2>El problema</h2>
-      <p>
-        Quien compra en línea abre varias tiendas, usa el buscador de cada una
-        y anota precios a mano. Una búsqueda toma entre 30 minutos y una hora, y
-        a veces termina en una compra por cansancio, no por convencimiento.
-      </p>
+    <!-- Imagen: reemplazar por <img src={`${base}img/...`} alt="..."> cuando exista la ilustracion -->
+    <figure class="acerca__imagen" role="img" aria-label="Ilustración de VitrinaDemo">
+      <span aria-hidden="true">🛍️</span>
+    </figure>
 
-      <h2>Para quién es</h2>
-      <p>
-        <strong>Andrés, 25 años</strong>, estudia y trabaja medio tiempo. Compra
-        tecnología y ropa desde el celular, de noche o en ratos libres.
-      </p>
-      <p>
-        <strong>Su tía, 47 años</strong>, compra cosas para la casa desde el
-        computador y necesita que todo sea claro y fácil de entender.
-      </p>
+    <p class="acerca__intro">
+      VitrinaDemo fue creada para que todos puedan comprar en línea con
+      facilidad y seguridad.
+    </p>
 
-      <h2>Decisiones de diseño</h2>
-      <ul>
-        <li>Filtros y orden visibles en la pantalla principal, porque el cliente se confunde con buscadores poco prácticos.</li>
-        <li>Calificación y descuento visibles en cada tarjeta, porque son los datos que decide el comprador.</li>
-        <li>Diseño pensado primero para el celular y con poco texto, porque el cliente quiere evitar interfaces llenas de letra.</li>
-        <li>Sin carrito ni pasarela de pagos en la primera versión: el foco es encontrar y comparar.</li>
-      </ul>
+    <div class="acerca__secciones">
+      <section>
+        <h2>El problema</h2>
+        <p>
+          Quien compra en línea abre varias tiendas, usa el buscador de cada una
+          y anota precios a mano. Una búsqueda toma entre 30 minutos y una hora,
+          y a veces termina en una compra por cansancio, no por convencimiento.
+        </p>
+      </section>
 
-      <h2>Créditos</h2>
-      <p>
-        Los productos provienen de
-        <a href="https://dummyjson.com" rel="noopener">DummyJSON</a>, una API
-        pública y gratuita. Proyecto académico de Programación IV · UNIAJC, por
-        Yerik Zambrano y Juan Manuel Toro.
-      </p>
-    </article>
+      <section>
+        <h2>Para quién es</h2>
+        <p>
+          <strong>Andrés, 25 años</strong>, estudia y trabaja medio tiempo.
+          Compra tecnología y ropa desde el celular, de noche o en ratos libres.
+        </p>
+        <p>
+          <strong>Su tía, 47 años</strong>, compra cosas para la casa desde el
+          computador y necesita que todo sea claro y fácil de entender.
+        </p>
+      </section>
 
-    <aside class="ficha" aria-label="Ficha del proyecto">
-      <h2>Ficha</h2>
+      <section>
+        <h2>Decisiones del diseño</h2>
+        <ul>
+          <li>Filtros y orden visibles en la pantalla principal, para no perderse entre buscadores confusos.</li>
+          <li>Calificación y descuento visibles en cada tarjeta, porque son los datos con los que se decide.</li>
+          <li>Pensado primero para el celular y con poco texto.</li>
+          <li>Sin carrito ni pasarela de pagos en la primera versión: el foco es encontrar y comparar.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Datos</h2>
+        <p>
+          Los productos provienen de
+          <a href="https://dummyjson.com" rel="noopener">DummyJSON</a>, una API
+          pública y gratuita. Proyecto académico de Programación IV · UNIAJC,
+          por Yerik Zambrano y Juan Manuel Toro.
+        </p>
+      </section>
+    </div>
+
+    <aside class="ficha" aria-labelledby="t-ficha">
+      <h2 id="t-ficha">Ficha técnica</h2>
       <dl>
         <dt>Cliente</dt><dd>Andrés Zapata</dd>
         <dt>Versión</dt><dd>1: listado, filtros, orden y paginación</dd>
@@ -57,40 +75,95 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <style>
+  /* Celular: titulo, imagen, intro, secciones, ficha (una columna) */
   .acerca {
     display: grid;
-    gap: var(--esp-5);
-    padding-top: var(--esp-5);
+    gap: var(--esp-3);
+    padding-top: var(--esp-3);
   }
-  @media (min-width: 900px) {
-    .acerca {
-      grid-template-columns: 1fr 320px;
-      gap: var(--esp-6);
-      align-items: start;
-    }
-  }
-  .acerca__texto {
-    max-width: var(--ancho-lectura);
-  }
-  .acerca__texto h2 { margin-top: var(--esp-5); }
-  .ficha {
+  .acerca__titulo { margin: 0; }
+
+  .acerca__imagen {
+    display: grid;
+    place-items: center;
+    margin: 0;
+    min-height: 140px;
     background: var(--color-superficie);
     border: 1px solid var(--color-borde);
-    border-radius: var(--radio-m);
+    border-radius: var(--radio-s);
+    font-size: var(--texto-xxl);
+  }
+  .acerca__intro {
+    margin: 0;
+    padding: var(--esp-4);
+    background: var(--color-marca);
+    border-radius: var(--radio-s);
+    color: var(--color-texto);
+  }
+
+  .acerca__secciones section {
+    padding: var(--esp-3) 0;
+    border-top: 1px solid var(--color-borde);
+    max-width: var(--ancho-lectura);
+  }
+  .acerca__secciones section:first-child { border-top: 0; }
+  .acerca__secciones h2 { font-size: var(--texto-l); margin-bottom: var(--esp-2); }
+  .acerca__secciones p,
+  .acerca__secciones li { color: var(--color-texto); }
+  .acerca__secciones a { color: var(--color-marca-oscuro); font-weight: 600; }
+
+  .ficha {
+    background: var(--color-marca);
+    border-radius: var(--radio-l);
     padding: var(--esp-4);
   }
+  .ficha h2 {
+    font-size: var(--texto-l);
+    margin: 0 0 var(--esp-3);
+    padding-bottom: var(--esp-2);
+    border-bottom: 1px solid var(--color-borde);
+  }
+  .ficha dl {
+    margin: 0;
+    padding: var(--esp-3);
+    background: #dcdcdc;
+    border-radius: var(--radio-s);
+  }
+  .ficha dt {
+    font-size: var(--texto-xs);
+    font-weight: 700;
+    color: var(--color-texto-suave);
+    margin-top: var(--esp-2);
+  }
+  .ficha dt:first-child { margin-top: 0; }
+  .ficha dd { margin: 0; color: var(--color-texto); }
+
+  /* Escritorio: intro + secciones a la izquierda, imagen + ficha a la derecha */
   @media (min-width: 900px) {
+    .acerca {
+      grid-template-columns: 1fr 400px;
+      grid-template-areas:
+        "intro   imagen"
+        "secciones ficha";
+      column-gap: var(--esp-6);
+      align-items: start;
+    }
+    /* El h1 sigue en el HTML para lectores de pantalla, pero no se ve (como en el mockup) */
+    .acerca__titulo {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+    .acerca__intro { grid-area: intro; }
+    .acerca__imagen { grid-area: imagen; min-height: 220px; }
+    .acerca__secciones { grid-area: secciones; }
     .ficha {
+      grid-area: ficha;
       position: sticky;
       top: var(--esp-5);
     }
   }
-  .ficha h2 { font-size: var(--texto-M); margin-top: 0; }
-  .ficha dt {
-    font-size: var(--texto-xs);
-    font-weight: 700;
-    color: var(--color-texto-tenue);
-    margin-top: var(--esp-3);
-  }
-  .ficha dd { margin: 0; }
 </style>
